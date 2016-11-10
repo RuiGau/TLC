@@ -100,49 +100,49 @@ simple_stmt: TURN_LEFT
 |			MOVE
 				{ gen (INVOKE (move, 0, 0)) }
 |			PICK_BEEPER
-				{ print_string("PICK_BEEPER") }
+				{ gen (INVOKE (pick_beeper, 0, 0)) }
 |			PUT_BEEPER
-				{ print_string("PUT_BEEPER") }
+				{ gen (INVOKE (put_beeper, 0, 0)) }
 |			NEXT_TO_A_BEEPER
 				{ print_string("NEXT_TO_A_BEEPER") }
 ;
 
 test: FRONT_IS_CLEAR
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.is_clear, Karel.front, d)); d }
 | 	FRONT_IS_BLOCKED
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.is_blocked, Karel.front, d)); d }
 | 	LEFT_IS_CLEAR
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.is_clear, Karel.left, d)); d }
 | 	LEFT_IS_BLOCKED
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.is_blocked, Karel.left, d)); d }
 | 	RIGHT_IS_CLEAR
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.is_clear, Karel.right, d)); d }
 | 	RIGHT_IS_BLOCKED
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.is_blocked, Karel.right, d)); d }
 | 	NOT_NEXT_TO_A_BEEPER
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.no_next_beeper, d, 0)); d }
 | 	NEXT_TO_A_BEEPER
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.next_beeper, d, 0)); d }
 | 	FACING_NORTH
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.facing, Karel.north, d)); d }
 | 	NOT_FACING_NORTH
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.not_facing, Karel.north, d)); d }
 | 	FACING_EAST
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.facing, Karel.east, d)); d }
 | 	NOT_FACING_EAST
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.not_facing, Karel.east, d)); d }
 | 	FACING_SOUTH
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.facing, Karel.south, d)); d }
 | 	NOT_FACING_SOUTH
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.not_facing, Karel.south, d)); d }
 | 	FACING_WEST
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.facing, Karel.west, d)); d }
 | 	NOT_FACING_WEST
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.not_facing, Karel.west, d)); d }
 | 	ANY_BEEPERS_IN_BEEPER_BAG
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.any_beeper, d, 0)); d }
 | 	NO_BEEPERS_IN_BEEPER_BAG
-		{ () }
+		{ let d = new_temp() in gen (INVOKE (Karel.no_beeper, d, 0)); d }
 
 ;
 
